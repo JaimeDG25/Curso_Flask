@@ -1,0 +1,22 @@
+{%extends './base.html'%}
+{% block tittle%} Servicio {% endblock%}
+
+{% block body%}
+<!-- Vincula tu CSS desde la carpeta templates/CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css')}}">
+<h2>este es un titulo de servicio</h2>
+<p class="colorido">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam, ducimus debitis qui 
+    quisquam rerum voluptas asperiores nulla neque iusto cupiditate, voluptatem libero enim 
+    corporis ad aspernatur ex in, eos consectetur!
+</p>
+<script>
+    // Seleccionamos el botón
+    const boton = document.getElementById('miBoton');
+    // Agregamos un evento 'click' al botón
+    boton.addEventListener('click', function() {
+        // Seleccionamos el párrafo y le agregamos la clase 'highlight'
+        const parrafo = document.getElementById('miParrafo');
+        parrafo.classList.add('highlight');
+    });
+</script>
+{% endblock%}

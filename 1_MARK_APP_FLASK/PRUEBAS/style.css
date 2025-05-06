@@ -1,0 +1,19 @@
+.row{
+    background-color: rgb(59, 88, 88);
+
+}
+
+.archivito{
+    border: 1px solid black;
+}
+.principal{
+    border: 1px solid black;
+    background-color: rgb(160, 250, 250);
+    height: 200px;
+    border: 1px solid black;
+    line-height: 150px;
+    text-align: center;
+}
+span{
+    vertical-align: middle;
+}

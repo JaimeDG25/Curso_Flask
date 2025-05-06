@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Clase con JS</title>
+    <style>
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <p id="miParrafo">Este es un párrafo sin clase aún.</p>
+    <button id="miBoton">Agregar Clase</button>
+
+    <script>
+        // Seleccionamos el botón
+        const boton = document.getElementById('miBoton');
+        // Agregamos un evento 'click' al botón
+        boton.addEventListener('click', function() {
+            // Seleccionamos el párrafo y le agregamos la clase 'highlight'
+            const parrafo = document.getElementById('miParrafo');
+            parrafo.classList.add('highlight');
+        });
+    </script>
+
+</body>
+</html>

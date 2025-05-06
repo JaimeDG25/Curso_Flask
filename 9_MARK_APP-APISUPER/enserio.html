@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Súper Animación</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #333;
+        }
+
+        .super-caja {
+            width: 100px;
+            height: 100px;
+            background-color: #ff5722;
+            border-radius: 20%;
+            position: relative;
+            animation: superAnimacion 5s infinite ease-in-out;
+        }
+
+        @keyframes superAnimacion {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                background-color: #ff5722;
+                width: 100px;
+                height: 100px;
+            }
+            25% {
+                transform: translate(200px, 0) rotate(90deg);
+                background-color: #4caf50;
+                width: 120px;
+                height: 120px;
+            }
+            50% {
+                transform: translate(200px, 200px) rotate(180deg);
+                background-color: #2196f3;
+                width: 150px;
+                height: 150px;
+            }
+            75% {
+                transform: translate(0, 200px) rotate(270deg);
+                background-color: #9c27b0;
+                width: 120px;
+                height: 120px;
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+                background-color: #ff5722;
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="super-caja"></div>
+</body>
+</html>

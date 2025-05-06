@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>DRAGON BALL Z</h1>
+    <!-- Sección para obtener un Pokémon existente -->
+    <label for="guerrero_id">ID del guerrero:</label>
+    <input type="number" id="guerrero_id" value="1">
+    <button id="getGuerrero">Obtener datos del guerreros z</button>
+    <h2>Detalles del guerrero:</h2>
+    <div id="guerreroInfo"></div>
+    <script>
+        const boton= document.getElementById('getGuerrero');
+        const info_z=document.getElementById('guerreroInfo');
+
+        boton.addEventListener('click', ()=>{
+            const guerreroz=document.getElementById('guerrero_id').value;
+            console.log(guerreroz)
+            fetch(`http://127.0.0.1:9400/dbz/${guerreroz}`)
+            .then(response => response.json())
+            .then(data => {
+                    if (data.error) {
+                        info_z.innerHTML = `<p>${data.error}</p>`;
+                    } else {
+                        // Convertir el array de técnicas en una lista de HTML
+                        let tecnicasHTML = '<ul>';
+                        data.tecnicas.forEach(tecnica => {
+                            tecnicasHTML += `<li>${tecnica}</li>`;
+                        });
+                        tecnicasHTML += '</ul>';
+                        info_z.innerHTML = `
+                            <p>Nombre: ${data.nombre}</p>
+                            <p>Saga: ${data.arco_saga}</p>
+                            <p>Técnicas: ${tecnicasHTML}</p>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al obtener los datos del Pokémon:', error);
+                });
+        })
+    </script>
+</body>
+</html>

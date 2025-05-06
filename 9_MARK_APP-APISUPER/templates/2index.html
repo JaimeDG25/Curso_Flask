@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/2index.css">
+</head>
+<body>
+    <h1>Este es una pagina de index 2 html</h1>
+    <form action="/envio" method="POST">
+        <label for="entrenador_id">Nombre:</label>
+        <input type="text" name="entrenador" id="entrenador_id" value="ASH KEPTCHUP"><br><br>
+        <h4>ELIJA EL NUMERO DE LA POKEDEX</h4>
+        <label for="numero_id">Numero:</label>
+        <input type="number" name="numero" id="numero_id" value="1" readonly> <!-- Se hace readonly para que no se edite manualmente -->
+        <input type="submit" id="boton">
+    </form>
+    <button id="decrementar">Decrementar</button>
+    <button id="incrementar">Incrementar</button>
+    <div class="selector">1</div>
+
+    <!-- Div para mostrar la información del Pokémon -->
+    <div class="pokedex" id="pokemon-info" style="margin-top: 20px;"></div>
+
+    <script>
+        // Obtener referencias a los elementos del DOM
+        const botonDecrementar = document.getElementById('decrementar');
+        const botonIncrementar = document.getElementById('incrementar');
+        const numeroDiv = document.querySelector('.selector');
+        const numeroInput = document.getElementById('numero_id');  // Referencia al input del número de la pokedex
+        const pokemonInfo = document.getElementById('pokemon-info'); // Div donde se mostrará la info del Pokémon
+        
+        // Inicializamos el valor en 1
+        let selector = 1;
+
+        // Función para actualizar el contenido del div y el input con el valor actual
+        const actualizarNumero = () => {
+            numeroDiv.textContent = selector;  // Actualizamos el número en la interfaz del div
+            numeroInput.value = selector;      // Actualizamos el input hidden que se usa para la búsqueda
+            obtenerPokemon();                  // Llamamos a la API cada vez que actualizamos el número
+        };
+
+        // Función para obtener el Pokémon de la API
+        const obtenerPokemon = () => {
+            const entrenador_local = document.getElementById('entrenador_id').value;
+            fetch(`https://pokeapi.co/api/v2/pokemon/${selector}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    const imageUrl = data.sprites.front_default;  // Obtener la imagen del Pokémon
+    
+                    pokemonInfo.innerHTML = `
+                        <h3>Información del Pokémon:</h3>
+                        <p>Estimado: ${entrenador_local}</p>
+                        <p>Nombre: ${data.name}</p>
+                        <p>ID: ${data.id}</p>
+                        <p>Tipo: ${data.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
+                        <img src="${imageUrl}" alt="Imagen de ${data.name}">
+                    `;
+                } else {
+                    console.log('No se pudo obtener la información del Pokémon.');
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener Pokémon:', error);
+            });
+        };
+
+        // Evento para incrementar el número
+        botonIncrementar.addEventListener('click', () => {
+            selector++;  // Incrementamos el valor
+            actualizarNumero();  // Reflejamos el cambio en el div y el input y llamamos a la API
+        });
+
+        // Evento para decrementar el número
+        botonDecrementar.addEventListener('click', () => {
+            if (selector > 1) {  // Condición para evitar que el número sea menor que 1
+                selector--;  // Decrementamos el valor si es mayor que 1
+                actualizarNumero();  // Reflejamos el cambio en el div y el input y llamamos a la API
+            }
+        });
+
+        // Llamada inicial para mostrar el valor inicial al cargar la página
+        actualizarNumero();
+
+        //================================================
+        const boton = document.getElementById('boton');
+        boton.addEventListener('click', (event) => {
+            event.preventDefault();
+            const entrenador_local = document.getElementById('entrenador_id').value; 
+            const numero_local = numeroInput.value;  // Tomamos el número actual desde el input número_id (sin cambios manuales)
+            
+            console.log(`Hola, mi estimado ${entrenador_local}`);
+            console.log(`Tu número es: ${numero_local}`);   
+    
+            // Realizar la petición fetch
+            fetch('/envio', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'  // Especificar que enviamos datos JSON
+                },
+                body: JSON.stringify({
+                    entrenador_json: entrenador_local,
+                    numero_json: numero_local
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) { 
+                    console.log('ENVIADO');
+                }
+                console.log('Respuesta del servidor:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+
+<!-- <body>
+    <h1>Este es una pagina de index 2 html</h1>
+    <form action="/envio" method="POST">
+        <label for="entrenador_id">Nombre:</label>
+        <input type="text" name="entrenador" id="entrenador_id" value="ASH KEPTCHUP"><br><br>
+        <h4>ELIJA EL NUMERO DE LA POKEDEX</h4>
+        <label for="numero_id">Numero:</label>
+        <input type="number" name="numero" id="numero_id">
+        <input type="submit" id="boton">
+    </form>
+    <button id="decrementar">Decrementar</button>
+    <button id="incrementar">Incrementar</button>
+    <div class="selector">1</div>
+    
+    <div class="pokedex" id="pokemon-info" style="margin-top: 20px;"></div>
+
+    <script>
+        // Obtener referencias a los elementos del DOM
+        const botonDecrementar = document.getElementById('decrementar');
+        const botonIncrementar = document.getElementById('incrementar');
+        const numeroDiv = document.querySelector('.selector');
+        // Inicializamos el valor en 1
+        let selector = 1;
+        console.log(selector)
+        // Función para actualizar el contenido del div con el valor actual
+        const actualizarNumero = () => {
+            numeroDiv.textContent = selector;  // Actualizamos el número en la interfaz
+        };
+
+        // Evento para incrementar el número
+        botonIncrementar.addEventListener('click', () => {
+            selector++;  // Incrementamos el valor
+            actualizarNumero();  // Reflejamos el cambio en el div
+            console.log(selector)
+        });
+
+        // Evento para decrementar el número
+        botonDecrementar.addEventListener('click', () => {
+            if (selector > 1) {  // Condición para evitar que el número sea menor que 1
+                selector--;  // Decrementamos el valor si es mayor que 1
+                actualizarNumero();  // Reflejamos el cambio en el div
+                console.log(selector)
+            }
+        });
+
+        // Llamada inicial para mostrar el valor inicial al cargar la página
+        actualizarNumero();
+        //================================================
+        const boton = document.getElementById('boton');
+        boton.addEventListener('click', (event) => {
+            event.preventDefault();
+            const entrenador_local = document.getElementById('entrenador_id').value; 
+            const numero_local = document.getElementById('numero_id').value;
+            console.log(`Hola, mi estimado ${entrenador_local}`);
+            console.log(`Tu número es: ${numero_local}`);   
+    
+            // Realizar la petición fetch
+            fetch('/envio', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'  // Especificar que enviamos datos JSON
+                },
+                body: JSON.stringify({
+                    entrenador_json: entrenador_local,
+                    numero_json: numero_local
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) { 
+                    console.log('ENVIADO');
+                }
+                //document.getElementById('entrenador_id').value = '';
+                document.getElementById('numero_id').value = '';
+                console.log('Respuesta del servidor:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    
+            // Nueva petición fetch para obtener la información del Pokémon
+            fetch(`https://pokeapi.co/api/v2/pokemon/${numero_local}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    const pokemonInfo = document.getElementById('pokemon-info');
+                    const imageUrl = data.sprites.front_default;  // Obtener la imagen del Pokémon
+    
+                    pokemonInfo.innerHTML = `
+                        <h3>Información del Pokémon:</h3>
+                        <p>Estimado: ${entrenador_local}</p>
+                        <p>Nombre: ${data.name}</p>
+                        <p>ID: ${data.id}</p>
+                        <p>Tipo: ${data.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
+                        <img src="${imageUrl}" alt="Imagen de ${data.name}">
+                    `;
+                } else {
+                    console.log('No se pudo obtener la información del Pokémon.');
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener Pokémon:', error);
+            });
+        });
+    </script>
+</body> -->
+</html>

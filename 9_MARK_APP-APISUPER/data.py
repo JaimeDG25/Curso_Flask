@@ -1,0 +1,20 @@
+db_datos = {
+    1: {"nombre": "goku", "arco_saga": "sayayin", "tecnicas": ["Kamehame ha", "Genkidama","Kaioken"]},
+    2: {"nombre": "picolo", "arco_saga": "sayayin", "tecnicas": ["Makankosapo", "Regeneración"]},
+    3: {"nombre": "raditz", "arco_saga": "sayayin", "tecnicas": ["Fin de semana", "Doble rayo"]},
+    4: {"nombre": "gohan", "arco_saga": "sayayin", "tecnicas": ["Masenko", "Choque frenesi"]},
+    5: {"nombre": "krilin", "arco_saga": "sayayin", "tecnicas": ["Kienzan", "Kame hame ha","Taio ken"]},
+    6: {"nombre": "ten-shin han", "arco_saga": "sayayin", "tecnicas": ["Ki ko hoo", "Shin kikoho"]},
+    7: {"nombre": "yansha", "arco_saga": "sayayin", "tecnicas": ["Roga fufu-ken", "Kamehameha"]},
+    8: {"nombre": "chaoz", "arco_saga": "sayayin", "tecnicas": ["Dodompa", "Telequinesis"]},
+    9: {"nombre": "nappa", "arco_saga": "sayayin", "tecnicas": ["Kappa", "Tormenta de arena"]},
+    10: {"nombre": "vegueta", "arco_saga": "sayayin", "tecnicas": ["Galick ho", "Destello rapido"]},
+    11: {"nombre": "goku", "arco_saga": "namek", "tecnicas": ["Kame-hame ha", "Kaioken","Genkidama"]},
+    12: {"nombre": "gohan", "arco_saga": "namek", "tecnicas": ["Masenko", "Furia del dragón"]},
+    13: {"nombre": "krilin", "arco_saga": "namek", "tecnicas": ["Kienzan", "Torrente de energía"]},
+    14: {"nombre": "vegueta", "arco_saga": "namek", "tecnicas": ["Galick ho", "Final Flash"]},
+    15: {"nombre": "picolo", "arco_saga": "namek", "tecnicas": ["Makankosapo", "Regeneración"]},
+    16: {"nombre": "nail", "arco_saga": "namek", "tecnicas": ["Tri rayo", "Explosión de energía"]},
+    17: {"nombre": "freezer", "arco_saga": "namek", "tecnicas": ["Dead ball", "Rayo mortal"]},
+    18: {"nombre": "fuerzas ginyu", "arco_saga": "namek", "tecnicas": ["BAILES", "Ataque en grupo"]}
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumo de API Pokémon</title>
+</head>
+<body>
+    <h1>Pokémon Info</h1>
+
+    <!-- Sección para obtener un Pokémon existente -->
+    <label for="pokemon_id">ID del Pokémon:</label>
+    <input type="number" id="pokemon_id" value="1">
+    <button id="getPokemon">Obtener Pokémon</button>
+    
+    <h2>Detalles del Pokémonses:</h2>
+    <div id="pokemonInfo"></div>
+
+    <script>
+        const getPokemonButton = document.getElementById('getPokemon');
+        const pokemonInfoDiv = document.getElementById('pokemonInfo');
+        
+        // Obtener un Pokémon existente
+        getPokemonButton.addEventListener('click', () => {
+            const pokemonId = document.getElementById('pokemon_id').value;
+
+            fetch(`http://127.0.0.1:9300/pokemons/${pokemonId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        pokemonInfoDiv.innerHTML = `<p>${data.error}</p>`;
+                    } else {
+                        pokemonInfoDiv.innerHTML = `
+                            <p>Nombre: ${data.name}</p>
+                            <p>ID: ${data.id}</p>
+                            <p>Tipo: ${data.type.join(', ')}</p>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al obtener los datos del Pokémon:', error);
+                });
+        });
+    </script>
+</body>
+</html>
+

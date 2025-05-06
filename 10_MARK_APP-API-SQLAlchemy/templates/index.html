@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>hola mundo</h1>
+    <form action="/añadir" method="post">
+        <label for="description">description</label>
+        <input type="text" id="description" name="description">
+        <label for="title">title</label>
+        <input type="text" id="title" name="title">
+        <input type="submit" value="enviar datos">
+    </form>
+    <form action="/mostrar" method="GET">
+        <button type="submit">Mostrar Tareas</button>
+    </form>
+    <!-- Tabla para mostrar tareas solo si existen en la variable `tasks` -->
+    {% if tasks %}
+    <h2>Tareas almacenadas</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descripción</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.id }}</td>
+            <td>{{ task.title }}</td>
+            <td>{{ task.description }}</td>
+            <td>
+                <a href="/eliminar/{{task.id}}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

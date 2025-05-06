@@ -1,0 +1,35 @@
+{%extends './plantilla.html'%}
+{% block tittle%} Principal {% endblock%}
+{% block body%}
+<h2>seccion de formulario</h2>
+<hr>
+<form action="/agregar" method="POST">
+    <label for="numero">NUMERO:</label>
+    <input type="number" name="numero" required="true">
+    <label for="nombre">NOMBRE:</label>
+    <input type="text" name="nombre" required="true">
+    <input type="submit">
+</form>
+<br><hr>
+<table>
+    <thead>
+        <tr>
+            <td>NUMERO</td>
+            <td>NOMBRE</td>
+            <td>OPERACION</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for dato in datos %}
+        <tr>
+            <td>{{ dato[0] }}</td>
+            <td>{{ dato[1] }}</td>
+            <td>
+                <a href="/editar/{{dato[0]}}">EDITAR</a>
+                <a href="/eliminar/{{dato[0]}}">ELIMINAR</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock%}

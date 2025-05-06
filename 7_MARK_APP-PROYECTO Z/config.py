@@ -1,0 +1,3 @@
+class configuracion () :
+    DEBUG = True
+

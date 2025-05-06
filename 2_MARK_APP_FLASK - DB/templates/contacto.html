@@ -1,0 +1,9 @@
+{%extends './base.html'%}
+
+{% block tittle%} Contacto {% endblock%}
+
+{% block body%}
+<!-- Vincula tu CSS desde la carpeta templates/CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contacto.css')}}">
+<h2>este es un titulo de contacto</h2>
+{% endblock%}

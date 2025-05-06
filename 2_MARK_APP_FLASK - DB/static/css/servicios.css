@@ -1,0 +1,17 @@
+h2{
+    color: blue;
+}
+.colorido{
+    color: rgb(255, 0, 98);
+}
+
+.singular1{
+    background-color: rgb(3, 3, 59);
+    border-radius: 20px;
+    padding: 10px;
+    color: cyan;
+}
+.singular1:hover{
+    background-color: rgb(151, 151, 240);
+    color: black;
+}
